@@ -1,0 +1,24 @@
+{
+  "name": "contract-sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/8eni/contract-sandbox.git"
+  },
+  "author": "Benni Russell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/8eni/contract-sandbox/issues"
+  },
+  "homepage": "https://github.com/8eni/contract-sandbox#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "solc": "^0.4.13",
+    "web3": "^0.19.1"
+  }
+}
