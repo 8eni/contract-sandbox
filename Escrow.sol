@@ -1,31 +1,33 @@
 contract Escrow {
-
-	address public buyer;
-	address public seller;
-	address public arbiter;
-
-	function Escrow(address _seller, address _arbiter) {
-		buyer = msg.sender;
-		seller = _seller;
-		arbiter = _arbiter;
-	}
-
-	function payoutToSeller() {
-		if(msg.sender == buyer || msg.sender == arbiter) {
-			seller.send(this.balance);
-		}
-	}
-
-	function refundToBuyer() {
-		if(msg.sender == seller || msg.sender == arbiter) {
-			buyer.send(this.balance);
-		}
-	}
-
-	function getBalance() constant returns (uint) {
-		return this.balance;
-	}
-
-	function sendEth() payable {}
-
+    
+    address chairperson;
+    
+    function Escrow() {
+        chairperson = msg.sender;    
+    }
+    
+    // Modiefiers
+    modifier chairPersonOnly() {
+        if (chairperson != msg.sender) return;
+        _;
+    }
+    
+    // Setters
+    function sendEthToContract() payable returns(uint) {
+        return msg.value;
+    }
+    
+    function sendContractEthToChairperson() chairPersonOnly returns(uint) {
+        chairperson.transfer(this.balance);
+        return chairperson.balance;
+    }
+    
+    // Getter
+    function getAddressBalance(address _address) constant returns(uint) {
+        return _address.balance;
+    }
+    
+    function getContractBalance() constant returns(uint) {
+        return this.balance;
+    }
 }
